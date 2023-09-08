@@ -1,0 +1,22 @@
+.container {
+    position: relative;
+    display: inline-block;
+    color: pink;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1000px;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+
+.imagen{
+   width:  300px;
+   
+   padding: 30%
+}
