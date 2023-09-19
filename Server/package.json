@@ -1,0 +1,19 @@
+{
+  "name": "integration-server",
+  "version": "1.0.0",
+  "description": "servidor intermediario entre mi front-end y la web api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MariangelRondan"
+  },
+  "author": "Mariangel Rondan",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
