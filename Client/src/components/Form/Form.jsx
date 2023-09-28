@@ -53,7 +53,7 @@ evento.preventDefault()
 
 {/* <button onSubmit={handleSubmit} onClick={() =>{ validation(userData)}}>Submit</button> */}
 {/* ANTES LO TENIA ASI => PROP.PERMISOS PERO DECIA 'ANY'  */}
-<button onSubmit={handleSubmit} onClick={() => props.permisos(userData)}>Submit</button>
+<button onSubmit={handleSubmit} onClick={() => validation(userData)}>Submit</button>
 
         </form>
        </div>

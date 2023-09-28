@@ -1,4 +1,3 @@
-import Form from "./components/Form/Form";
 
 function validation(userData) {
   const validationEmail =

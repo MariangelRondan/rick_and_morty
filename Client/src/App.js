@@ -1,5 +1,4 @@
 import "./App.css";
-import Card from "./components/Card/Card.jsx";
 import Cards from "./components/Cards/Cards.jsx";
 import About from "./components/About/About.jsx";
 import Detail from "./components/Detatil/Detail.jsx";
@@ -22,7 +21,7 @@ function App() {
   const [characters, setCharacters] = useState([]); //estado local incializado como un [] vacio
 
   const onSearch = (id) => {
-    axios(`http://localhost:3001/rick_and_morty/character/${id}`).then(
+    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
       ({ data }) => {
         if (data.name) {
           //verifica que se haya encontrado el personaje (si data.name existe, encontro el personaje correctamente)
@@ -74,16 +73,18 @@ function App() {
   //seguridad
   const [access, setAccess] = useState(false);
 
-  const miEmail = "m";
-  const miPassword = "m";
   const navigate = useNavigate();
 
-  const login = (userData) => {
-    if (userData.email === miEmail && userData.password === miPassword) {
-      setAccess(true);
-      navigate("/home");
-    }
-  };
+  //nueva fn login que agregue en express
+  function login(userData) {
+    const { email, password } = userData;
+    const URL = "http://localhost:3001/rickandmorty/login/";
+    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      const { access } = data;
+      setAccess(data);
+      access && navigate("/home");
+    });
+  }
 
   useEffect(() => {
     !access && navigate("/");

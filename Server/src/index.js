@@ -1,31 +1,24 @@
-let http = require("http");
-// const dataJSON = require(data.js);
-let fs = require("fs");
-const url = require("url");
-const querystring = require("querystring");
+const express = require("express");
+const router = require("./routes/index");
 
+const server = express();
 const PORT = 3001;
 
-const server = http
-  .createServer((req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "*"); //CONFIGURA CORES. Permite acceso a la app desde cualquier ruta
+server.use(express.json());
 
-    if (req.url.includes("/rickandmorty/character/")) {
-      const urlSegment = req.url.split("/");
-      fs.readFile("./utils/data.js", (err, data) => {
-        if (err) {
-          res.writeHead(404, { "Content-Type": "text/plain" });
-          res.end("json not found");
-        }
-        if (data) {
-          const character = data.filter((indice) => {
-            parseInt(indice.id) === urlSegment[urlSegment.length - 1];
-          });
-          res.writeHead(200, { "Content-Type": "application/json" });
+server.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+  next();
+});
 
-          res.end(JSON.stringify(character));
-        }
-      });
-    }
-  })
-  .listen(PORT, "localhost");
+server.use("/rickandmorty", router);
+
+server.listen(PORT, () => {
+  console.log("Server raised in port: " + PORT);
+});

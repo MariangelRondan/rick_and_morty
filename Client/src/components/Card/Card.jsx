@@ -11,8 +11,8 @@ import { useState, useEffect } from "react";
 function Card(props) {
   
    const handleClose = () => {
-      // props.onClose(props.id)
-      props.removeFav(props.id)
+      props.onClose(props.id)
+      // props.removeFav(props.id)
    };
 
  const [isFav, setIsFav] = useState(false);
@@ -40,8 +40,6 @@ function Card(props) {
 
 
    return (
-     
-
       <div className={style.card} >
        {
          isFav ? (
@@ -52,13 +50,10 @@ function Card(props) {
       }
          <img src={props.image} alt=''  className={style.imagen} />
          <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
-   
       <div className={style.info}>
          <Link to={`/detail/${props.id}`}>
-
          <h2 className={style.name}>{props.name}</h2>
          </Link>
-     
          <h2>{props.status}</h2>
          <h2>{props.species}</h2>
          <h2>{props.gender}</h2>

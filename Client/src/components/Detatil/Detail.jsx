@@ -1,9 +1,8 @@
 import React from "react";
 import axios from "axios";
-import style from './Detail.module.css'
 import { useParams} from "react-router-dom";
 import { useState, useEffect} from "react";
-import { useDispatch, useSelector } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 
 
 
@@ -12,15 +11,12 @@ export default function Detail() {
     const [character, setCharacter] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     // const character = useSelector((state)=> state.characterDetail)
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
     //se ejecuta la callback de useEffect cada vez que cambia params.id
     useEffect(() => {
 // dispatch(getCharacterDetail(params.id)) //guarda en el estado global
-
-
-
-      axios(`http://localhost:3001/rick_and_morty/character/${params.id}`).then(
+      axios(`http://localhost:3001/rickandmorty/character/${params.id}`).then(
         ({ data }) => {
           if (data.name) {
             setCharacter(data);
