@@ -46,7 +46,7 @@ function Card(props) {
          </div>
      
          <img src={props.image} alt=''  className={style.imagen} />
-         <button   className={style.button}  >X</button>  
+         <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
       <div className={style.info}>
          <Link to={`/detail/${props.id}`}>
          <h2 className={style.name}>{props.name}</h2>
