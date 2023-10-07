@@ -2,40 +2,37 @@ import "./App.css";
 import Cards from "./components/Cards/Cards.jsx";
 import About from "./components/About/About.jsx";
 import Detail from "./components/Detatil/Detail.jsx";
-// import characters, { Rick } from './data.js';
 import React from "react";
-import { useState } from "react";
 import NavBar from "./components/NavBar/NavBar.jsx";
 import axios from "axios";
-import { Route } from "react-router-dom";
-import { Routes } from "react-router-dom";
 import Error from "./components/Error/Error";
 import Form from "./components/Form/Form";
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useLocation, useNavigate, Route, Routes } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites/Favorites";
 
 function App() {
-  //componente
   const [characters, setCharacters] = useState([]); //estado local incializado como un [] vacio
 
-  const onSearch = (id) => {
-    axios(`http://localhost:3001/rickandmorty/character/${id}`).then(
-      ({ data }) => {
-        if (data.name) {
-          //verifica que se haya encontrado el personaje (si data.name existe, encontro el personaje correctamente)
-          const alreadyExist = characters.find(
-            (character) => character.id === data.id
-          );
-          if (!alreadyExist) {
-            setCharacters((oldChars) => [...oldChars, data]);
-          }
+  const onSearch = async (id) => {
+    try {
+      const { data } = await axios(
+        `http://localhost:3001/rickandmorty/character/${id}`
+      );
+      if (data.name) {
+        //verifica que se haya encontrado el personaje (si data.name existe, encontro el personaje correctamente)
+        const alreadyExist = characters.find(
+          (character) => character.id === data.id
+        );
+        if (!alreadyExist) {
+          setCharacters((oldChars) => [...oldChars, data]);
         } else {
-          window.alert("¡No hay personajes con este ID!");
+          window.alert("Ese personaje ya ha sido agregado");
         }
       }
-    );
+    } catch (error) {
+      window.alert(error.message);
+    }
   };
 
   //ejercico extra boton random
@@ -69,21 +66,24 @@ function App() {
 
   //para que nav NO aparezca en pathname = '/'
   const location = useLocation();
-
+  const navigate = useNavigate();
   //seguridad
   const [access, setAccess] = useState(false);
 
-  const navigate = useNavigate();
-
   //nueva fn login que agregue en express
-  function login(userData) {
-    const { email, password } = userData;
-    const URL = "http://localhost:3001/rickandmorty/login/";
-    axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+  async function login(userData) {
+    try {
+      const { email, password } = userData;
+      const URL = "http://localhost:3001/rickandmorty/login/";
+      const { data } = await axios(
+        URL + `?email=${email}&password=${password}`
+      );
       const { access } = data;
       setAccess(data);
       access && navigate("/home");
-    });
+    } catch (error) {
+      window.alert(error.message);
+    }
   }
 
   useEffect(() => {

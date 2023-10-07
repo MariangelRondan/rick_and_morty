@@ -1,8 +1,6 @@
-// import data from "../../data";
 import style from "./Card.module.css";
 import React from 'react';
 import { Link } from "react-router-dom";
-import Detail from "../Detatil/Detail";
 import {connect} from 'react-redux';
 import { addFav, removeFav } from "../../redux/actions";
 import { useState, useEffect } from "react";
@@ -12,22 +10,18 @@ function Card(props) {
   
    const handleClose = () => {
       props.onClose(props.id)
-      // props.removeFav(props.id)
    };
 
  const [isFav, setIsFav] = useState(false);
 
  const handleFavorite = () =>{
   
-  if(isFav === true) {
-   setIsFav(false) 
-   props.removeFav(props.id)
-  }
-  if(isFav === false){
-   setIsFav(true)
-   props.addFav(props)
-  }
-  
+   if (isFav) {
+      props.removeFav(props.id);
+    } else {
+      props.addFav(props);
+    }
+    setIsFav(!isFav);
  }
 
  useEffect(() => {
@@ -41,15 +35,18 @@ function Card(props) {
 
    return (
       <div className={style.card} >
-       {
+         <div>
+         {
          isFav ? (
             <button onClick={handleFavorite}>❤️</button>
          ) : (
             <button onClick={handleFavorite}>🤍</button>
          )
       }
+         </div>
+     
          <img src={props.image} alt=''  className={style.imagen} />
-         <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
+         <button   className={style.button}  >X</button>  
       <div className={style.info}>
          <Link to={`/detail/${props.id}`}>
          <h2 className={style.name}>{props.name}</h2>
@@ -58,6 +55,7 @@ function Card(props) {
          <h2>{props.species}</h2>
          <h2>{props.gender}</h2>
          <h2>{props.origin}</h2>
+         <h2>{props.id}</h2>
          </div>
 
          <hr></hr>

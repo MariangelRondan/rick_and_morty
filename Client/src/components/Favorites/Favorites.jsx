@@ -4,7 +4,7 @@ import Card from '../Card/Card';
 import style from './Favorites.module.css'
 import { useDispatch } from 'react-redux';
 import { orderCards, filterCards } from '../../redux/actions';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const Favorites = (props) =>{
 const dispatch = useDispatch()
@@ -40,9 +40,8 @@ return(
         status={character.status} 
         species={character.species} 
         gender={character.gender}
-        origin={character.origin.name} 
+        origin={character.origin} 
         image={character.image} 
-   onClose = {props.onClose}
         />)
 })}
         

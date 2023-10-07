@@ -21,13 +21,13 @@ const Form = (props) => {
 
      const handleSubmit = (evento) => {
 evento.preventDefault()
-
+    // Llama a la función de inicio de sesión y pasa los datos del usuario
+    props.permisos(userData);
      }
 
     return (
         <div className={style.formContainer}>
-
-<form >
+<form onSubmit={handleSubmit}>
             <div  className={style.email}>
             <label>Email:</label>
 <input 
@@ -40,7 +40,6 @@ evento.preventDefault()
             </div>
 
             <div className={style.password}>
-
             <label>Contraseña:</label>
 <input 
        type="password"
@@ -51,9 +50,7 @@ evento.preventDefault()
 <p>{errors.password}</p>
             </div>
 
-{/* <button onSubmit={handleSubmit} onClick={() =>{ validation(userData)}}>Submit</button> */}
-{/* ANTES LO TENIA ASI => PROP.PERMISOS PERO DECIA 'ANY'  */}
-<button onSubmit={handleSubmit} onClick={() => validation(userData)}>Submit</button>
+<button type="submit">Submit</button>
 
         </form>
        </div>

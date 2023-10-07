@@ -6,6 +6,7 @@ const initialState = {
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
+    //cambié la logica de add_fav y remove_fav
     case ADD_FAV:
       return {
         ...state,
