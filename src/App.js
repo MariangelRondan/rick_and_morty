@@ -46,7 +46,7 @@ function App() {
       axios(`https://rickandmortyapi.com/api/character/${randomId}`).then(
         ({ data }) => {
           if (data.name) {
-            setCharacters((oldChars) => [...oldChars, data]);
+            setCharacters([...characters, data]);
             setAddedCharacterIds((oldIds) => [...oldIds, randomId]); //va guardando los id que agrego, asi en la linea 34 se pregunta si ya esta en el array.
           } // setAddedCharacterIds((valorActualDelEstado) => [...valorActualDelEstado, valorAgregado]
         }
@@ -58,9 +58,7 @@ function App() {
 
   //cruz para cerrar card
   const onClose = (id) => {
-    const nuevoArray = characters.filter(
-      (character) => character.id !== Number(id)
-    );
+    const nuevoArray = characters.filter((character) => character.id !== id);
     setCharacters(nuevoArray);
   };
 
