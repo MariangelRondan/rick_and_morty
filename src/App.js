@@ -10,15 +10,18 @@ import Form from "./components/Form/Form";
 import { useLocation, useNavigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites/Favorites";
+import Register from "./components/register/Register";
 
 function App() {
   const [characters, setCharacters] = useState([]); //estado local incializado como un [] vacio
+  const [containerHeight, setContainerHeight] = useState(0);
 
   const onSearch = async (id) => {
     try {
       const { data } = await axios(
         `http://localhost:3001/rickandmorty/character/${id}`
       );
+      console.log(data); // la respuesta de axios es un objeto, la prop data de ese obj tiene al personaje
       if (data.name) {
         //verifica que se haya encontrado el personaje (si data.name existe, encontro el personaje correctamente)
         const alreadyExist = characters.find(
@@ -77,12 +80,17 @@ function App() {
         URL + `?email=${email}&password=${password}`
       );
       const { access } = data;
+
       setAccess(data);
       access && navigate("/home");
     } catch (error) {
       window.alert(error.message);
     }
   }
+
+  // useEffect(() => {
+  //   access && navigate("/home");
+  // }, [access]);
 
   useEffect(() => {
     !access && navigate("/");
@@ -94,11 +102,50 @@ function App() {
     navigate("/");
   };
 
+  //backgroundimage distintos para cada ruta
+
+  const backgroundStyle = {
+    "/home": {
+      backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
+
+      backgroundSize: "auto", // Cambiado de 'cover' a 'auto'
+      minHeight: "100vh", // Corregido el nombre de la propiedad
+      backgroundPosition: "center",
+      backgroundRepeat: "repeat",
+    },
+    "/favorites": {
+      backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100vh",
+      width: "100%",
+    },
+
+    "/register": {
+      backgroundImage: "url('https://images.alphacoders.com/936/936934.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100vh",
+      width: "100%",
+    },
+    "/": {
+      backgroundImage: "url('https://images.alphacoders.com/936/936934.jpg')",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      height: "100vh",
+      width: "100%",
+    },
+  };
+
   return (
     //renderiza..
-    <div className="App">
+    <div
+      id="container"
+      className="App"
+      style={backgroundStyle[location.pathname] || {}}
+    >
       {/* renderizado condicional de NavBar*/}
-      {location.pathname !== "/" ? (
+      {location.pathname !== "/" && location.pathname !== "/register" ? (
         <NavBar
           random={addRandomCharacter}
           onSearch={onSearch}
@@ -109,7 +156,12 @@ function App() {
       )}
 
       <Routes>
-        <Route path="/" element={<Form permisos={login} />} />
+        <Route
+          // style={backgroundStyle[location.pathname]}
+          path="/register"
+          element={<Register />}
+        />
+        <Route path="/" element={<Form login={login} />} />
         <Route
           path="/home"
           element={<Cards characters={characters} onClose={onClose} />}

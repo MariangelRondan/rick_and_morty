@@ -1,7 +1,8 @@
 import React, { useState } from "react"
 import validation from "../../validation";
 import style from './Form.module.css'
-
+import {  NavLink } from 'react-router-dom';
+import styles from '../generalStyles.module.css'
 
 const Form = (props) => {
     const [userData, setUserData] = useState({
@@ -22,11 +23,14 @@ const Form = (props) => {
      const handleSubmit = (evento) => {
 evento.preventDefault()
     // Llama a la función de inicio de sesión y pasa los datos del usuario
-    props.permisos(userData);
+    props.login(userData);
      }
 
     return (
         <div className={style.formContainer}>
+           <NavLink to='/register'>
+                <button className={style.button}>Registrarse</button>
+            </NavLink>
 <form onSubmit={handleSubmit}>
             <div  className={style.email}>
             <label>Email:</label>
@@ -53,9 +57,10 @@ evento.preventDefault()
 <button type="submit">Submit</button>
 
         </form>
+       
        </div>
     )
 }
 
 
-export default Form
+export default Form;

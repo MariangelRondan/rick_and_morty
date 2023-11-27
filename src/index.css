@@ -12,10 +12,10 @@ code {
     monospace;
 }
 
-html {
-  background-image: url(https://www.astrobitacora.com/wp-content/uploads/2015/09/1200px-Messier51_sRGB-1024x711.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
+ html { 
+  /* background-image: url(https://images4.alphacoders.com/133/1335396.png); */
+  /* background-size: cover; */
+  background-repeat: repeat-y;
 
-}
+ } 
 

@@ -28,7 +28,10 @@ export default function Detail() {
     let content;
   
     if (isLoading) {
-      content = <p>Cargando datos...</p>;
+      content = <div class="loader">
+      <div class="loader_cube loader_cube--color"></div>
+       <div class="loader_cube loader_cube--glowing"></div>
+    </div>
     } else if (character.name) {
       content = (
         <div className="card">

@@ -34,8 +34,13 @@ function Card(props) {
 
 
    return (
-      <div className={style.card} >
-         <div>
+
+
+
+
+
+<div className={style.card}>
+<div className={style.fav}>
          {
          isFav ? (
             <button onClick={handleFavorite}>❤️</button>
@@ -44,24 +49,26 @@ function Card(props) {
          )
       }
          </div>
-     
-         <img src={props.image} alt=''  className={style.imagen} />
-         <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
-      <div className={style.info}>
-         <Link to={`/detail/${props.id}`}>
-         <h2 className={style.name}>{props.name}</h2>
-         </Link>
-         <h2>{props.status}</h2>
-         <h2>{props.species}</h2>
-         <h2>{props.gender}</h2>
-         <h2>{props.origin}</h2>
-         <h2>{props.id}</h2>
-         </div>
+<img src={props.image} alt=''  className={style.img} /> 
+ <div className={style.textBox} >
+ <span>Name</span>
+    <p  className={`${style.text} ${style.head}`}>{props.name}</p>
+    <span>Species</span>
+  
+         <p className={`${style.text} ${style.price}`}>{props.species}</p>
+         <span>Gender</span>
+         <p className={`${style.text} ${style.price}`}>{props.gender}</p>
+         <span>Origin</span>
+         <p className={`${style.text} ${style.price}`}>{props.origin}</p>
+  </div>
 
-         <hr></hr>
-        
- <hr></hr>
-     </div>
+  <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
+
+
+  </div>
+  
+
+   
     
  );
 }
@@ -86,6 +93,33 @@ return {
 export default connect(mapStateToProps, mapDispatchToPorps)(Card)
 
 
+{/* <div className={style.card} >
+<div>
+         {
+         isFav ? (
+            <button onClick={handleFavorite}>❤️</button>
+         ) : (
+            <button onClick={handleFavorite}>🤍</button>
+         )
+      }
+         </div>
+     
+         <img src={props.image} alt=''  className={style.imagen} />
+         <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
+      <div className={style.info}>
+         <Link to={`/detail/${props.id}`}>
+         <h2 className={style.name}>{props.name}</h2>
+         </Link>
+         <h2>{props.status}</h2>
+         <h2>{props.species}</h2>
+         <h2>{props.gender}</h2>
+         <h2>{props.origin}</h2>
+         <h2>{props.id}</h2>
+         </div>
+
+         <hr></hr>
+        
+ <hr></hr> */}
 
 
 

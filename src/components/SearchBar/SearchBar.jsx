@@ -14,14 +14,14 @@ setId(event.target.value);
       //EJERCICIO 6
       <div className={style.agregar}>
          <p >Agregar personaje:</p>
-         <input
+         <input className={style.input}
           onChange={handleChange}
            type='search' 
            placeholder='Agrega aqui..' 
            value={id}/>
 
 
-         <button onClick={() => {prop.onSearch(id)}}>Agregar</button> 
+         <button className={style.button} onClick={() => {prop.onSearch(id)}}>Agregar</button> 
      {/* recibe la funcion onSearch como prop desde el componente nav. La funcion onSearch    
     se pasa commo prop desde App.js, a traves del coponente intermedio Nav, y finalmente a SearchBar. */}
 

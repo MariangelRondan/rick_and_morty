@@ -1,4 +1,4 @@
-button {
+.button {
     margin-top: 3%;
     background-color: transparent;
     color: white;
@@ -20,15 +20,11 @@ p{
     margin: 5px; /* Espacio entre los elementos */
 }
 
-input{
+.input{
    
-    border-radius: 8px;
-    height: 2em;
-    display: inline-block;
+    
     vertical-align: middle; /* Alinea verticalmente los elementos */
-    margin: 5px; /* Espacio entre los elementos */
-
-  
+    
 }
 
 .agregar{
