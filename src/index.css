@@ -13,8 +13,8 @@ code {
 }
 
  html { 
-  /* background-image: url(https://images4.alphacoders.com/133/1335396.png); */
-  /* background-size: cover; */
+  background-image: url('https://images4.alphacoders.com/133/1335396.png');
+  background-size: 100%;
   background-repeat: repeat-y;
 
  } 

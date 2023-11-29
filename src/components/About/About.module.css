@@ -1,7 +1,28 @@
-img{
+.img{
     width: 65%;
+    margin-left: 20%;
 }
 
-h1{
-    color: white
+.container h1{
+    color:  #822a18 ;
+
+margin-left: 5%;
+
+}
+
+.container{
+    padding: 4%;
+background-color:   #9aa35fde  ;
+width: 70%;
+margin: 5% 0% 0% 15%;
+font-size: 1.2em;
+border-radius: 25px;
+
+}
+
+.container p{
+  color:  #393626   ;
+  font-weight: 500;
+  font-size: 1.2em;
+  margin-left: 5%;
 }

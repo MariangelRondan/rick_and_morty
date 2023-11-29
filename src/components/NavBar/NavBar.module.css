@@ -1,0 +1,19 @@
+.button{
+    color:   #9aa35f     ;
+    border-color:   #9aa35f    ;
+    background-color:     #611b13 ;
+    margin: 0.5%;
+    width: 110px;
+    margin-left: 20px;
+}
+.button:hover{
+    background-color: transparent;
+    color:#611b13 ;
+    border-color: #611b13;
+}
+.container {
+    display: flex;
+    align-items: center; 
+    padding-top: 1%;
+    justify-content: center;
+  }

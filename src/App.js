@@ -105,21 +105,21 @@ function App() {
   //backgroundimage distintos para cada ruta
 
   const backgroundStyle = {
-    "/home": {
-      backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
+    // "/home": {
+    //   backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
 
-      backgroundSize: "auto", // Cambiado de 'cover' a 'auto'
-      minHeight: "100vh", // Corregido el nombre de la propiedad
-      backgroundPosition: "center",
-      backgroundRepeat: "repeat",
-    },
-    "/favorites": {
-      backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      height: "100vh",
-      width: "100%",
-    },
+    //   backgroundSize: "auto", // Cambiado de 'cover' a 'auto'
+    //   minHeight: "100vh", // Corregido el nombre de la propiedad
+    //   backgroundPosition: "center",
+    //   backgroundRepeat: "repeat",
+    // },
+    // "/favorites": {
+    //   backgroundImage: "url('https://images4.alphacoders.com/133/1335396.png')",
+    //   backgroundSize: "cover",
+    //   backgroundPosition: "center",
+    //   height: "100vh",
+    //   width: "100%",
+    // },
 
     "/register": {
       backgroundImage: "url('https://images.alphacoders.com/936/936934.jpg')",

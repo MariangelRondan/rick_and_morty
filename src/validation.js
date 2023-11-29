@@ -1,4 +1,3 @@
-
 function validation(userData) {
   const validationEmail =
     /^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/;
@@ -10,7 +9,7 @@ function validation(userData) {
     userData.email.length === 0 ||
     userData.email.length > 35
   ) {
-    errors.email = "Debe ingresar un mail válido";
+    errors.email = "Invalid email";
   }
 
   if (
@@ -18,7 +17,7 @@ function validation(userData) {
     userData.password.length < 6 ||
     userData.password.length > 10
   ) {
-    errors.password = "Contraseña inválida";
+    errors.password = "Must be between 6 and 10 characters";
   }
 
   return errors;

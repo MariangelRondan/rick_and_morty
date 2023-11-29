@@ -5,6 +5,7 @@ import style from './Favorites.module.css'
 import { useDispatch } from 'react-redux';
 import { orderCards, filterCards } from '../../redux/actions';
 import { useState } from 'react';
+import styles from "../NavBar/NavBar.module.css"
 
 const Favorites = (props) =>{
 const dispatch = useDispatch()
@@ -20,8 +21,9 @@ dispatch(filterCards(e.target.value))
 
 return(
     <div className={style.container}>
-<select onChange={handlerOrder}>
-<option value='A'>Ascendente</option>
+
+<select   onChange={handlerOrder}>
+<option  value='A'>Ascendente</option>
 <option value='B'>Descendente</option>
 </select>
 
@@ -31,6 +33,7 @@ return(
 <option value='Genderless'>Genderless</option>
 <option value='Unknown'>Unknown</option>
 </select>
+    <div className={style.containerCards}>
 
 {props.myFavorites.map((character)=>{ //mapea el arreglo del estado global myFavorites
     return (
@@ -45,6 +48,7 @@ return(
         />)
 })}
         
+    </div>
     </div>
    
 )

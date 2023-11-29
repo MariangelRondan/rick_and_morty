@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useState, useEffect} from "react";
-
+import style from "./Detail.module.css"
 
 export default function Detail() {
     const params = useParams();
@@ -34,13 +34,18 @@ export default function Detail() {
     </div>
     } else if (character.name) {
       content = (
-        <div className="card">
-          <h2>name={character.name}</h2>
-          <h2>status={character.status}</h2>
-          <h2>specie={character.species}</h2>
-          <h2>gender={character.gender}</h2>
-          <h2>origin={character.origin.name}</h2> 
-          <img src={character.image} alt="" />
+        <div className={style.card}>
+          <div>
+          <img className={style.image} src={character.image} alt="" />
+          </div>
+          <div className={style.text}>
+          <p><strong>Name: </strong>{character.name}</p>
+          <p> <strong>ID: </strong>{character.id}</p>
+          <p><strong>Status: </strong> {character.status}</p>
+          <p><strong>Species: </strong> {character.species}</p>
+          <p><strong>Gender: </strong> {character.gender}</p>
+          <p><strong>Origin: </strong> {character.origin.name}</p> 
+          </div>
         </div>
       );
     } else {

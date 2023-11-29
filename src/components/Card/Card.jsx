@@ -1,13 +1,16 @@
 import style from "./Card.module.css";
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import {connect} from 'react-redux';
 import { addFav, removeFav } from "../../redux/actions";
 import { useState, useEffect } from "react";
 
 
 function Card(props) {
-  
+
+ 
+
+
    const handleClose = () => {
       props.onClose(props.id)
    };
@@ -35,31 +38,29 @@ function Card(props) {
 
    return (
 
-
-
-
-
 <div className={style.card}>
 <div className={style.fav}>
          {
          isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
+            <button className={style.button} onClick={handleFavorite}>❤️</button>
          ) : (
-            <button onClick={handleFavorite}>🤍</button>
+            <button className={style.button} onClick={handleFavorite}>🤍</button>
          )
       }
          </div>
 <img src={props.image} alt=''  className={style.img} /> 
  <div className={style.textBox} >
- <span>Name</span>
-    <p  className={`${style.text} ${style.head}`}>{props.name}</p>
+
+ <NavLink to={`/detail/${props.id}`} className={`${style.text} ${style.head}`} style={{ textDecoration: 'none', color: '#e2d240  ', backgroundColor: "#4c4b30", fontSize: "1.5em", }}>
+
+    <p style={{padding: "3px"}}>{props.name}</p>
+    </NavLink>
+
     <span>Species</span>
   
          <p className={`${style.text} ${style.price}`}>{props.species}</p>
          <span>Gender</span>
          <p className={`${style.text} ${style.price}`}>{props.gender}</p>
-         <span>Origin</span>
-         <p className={`${style.text} ${style.price}`}>{props.origin}</p>
   </div>
 
   <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
@@ -67,7 +68,6 @@ function Card(props) {
 
   </div>
   
-
    
     
  );
@@ -91,62 +91,4 @@ return {
 }
 
 export default connect(mapStateToProps, mapDispatchToPorps)(Card)
-
-
-{/* <div className={style.card} >
-<div>
-         {
-         isFav ? (
-            <button onClick={handleFavorite}>❤️</button>
-         ) : (
-            <button onClick={handleFavorite}>🤍</button>
-         )
-      }
-         </div>
-     
-         <img src={props.image} alt=''  className={style.imagen} />
-         <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
-      <div className={style.info}>
-         <Link to={`/detail/${props.id}`}>
-         <h2 className={style.name}>{props.name}</h2>
-         </Link>
-         <h2>{props.status}</h2>
-         <h2>{props.species}</h2>
-         <h2>{props.gender}</h2>
-         <h2>{props.origin}</h2>
-         <h2>{props.id}</h2>
-         </div>
-
-         <hr></hr>
-        
- <hr></hr> */}
-
-
-
-
-
-
-//usando DETRUCTURING
-// let Card = ({name, species,status, gender, origin, image, onClose}) => {
-//    return(
-//       <div className={style.card}>
-//          <img className={style.imagen} src={image} alt='' />
-
-//          <div className={style.info}>
-//          <h2 className={style.name}>{name}</h2>
-//          <h2>{status}</h2>
-//          <h2>{species}</h2>
-//          <h2>{gender}</h2>
-//          <h2>{origin.name}</h2>     
-//          </div>
-              
-//          <hr></hr>
-//          <button className={style.button} onClick={onClose}>X</button>
-//          <hr></hr>
-        
-//       </div>
-//    )
-// }
-
-
 

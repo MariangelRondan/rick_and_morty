@@ -13,13 +13,11 @@ setId(event.target.value);
       
       //EJERCICIO 6
       <div className={style.agregar}>
-         <p >Agregar personaje:</p>
          <input className={style.input}
           onChange={handleChange}
            type='search' 
-           placeholder='Agrega aqui..' 
+           placeholder='Add characters by ID...' 
            value={id}/>
-
 
          <button className={style.button} onClick={() => {prop.onSearch(id)}}>Agregar</button> 
      {/* recibe la funcion onSearch como prop desde el componente nav. La funcion onSearch    
