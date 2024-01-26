@@ -1,39 +1,39 @@
 import style from "./Card.module.css";
 import React from 'react';
-import { Link, NavLink } from "react-router-dom";
-import {connect} from 'react-redux';
+import {  NavLink } from "react-router-dom";
+import { connect } from 'react-redux';
 import { addFav, removeFav } from "../../redux/actions";
 import { useState, useEffect } from "react";
 
 
+
 function Card(props) {
+   const {id, name, species, gender,  image, onClose, addFav, removeFav, myFavorites} = props;
+   let user;
 
- 
+    user = localStorage.getItem("user") 
 
-
+console.log(user)
    const handleClose = () => {
-      props.onClose(props.id)
+      onClose(id)
    };
 
  const [isFav, setIsFav] = useState(false);
 
- const handleFavorite = () =>{
-  
-   if (isFav) {
-      props.removeFav(props.id);
-    } else {
-      props.addFav(props);
-    }
-    setIsFav(!isFav);
- }
+ const handleFavorite = () => {
+   isFav ? removeFav(id, user) : addFav(props, user);
+   console.log(props)
+   setIsFav(!isFav);
+  };
 
- useEffect(() => {
-   props.myFavorites.forEach((fav) => {
-      if (fav.id === props.id) {
-         setIsFav(true);
-      }
-   });
-}, [props.myFavorites]);
+
+useEffect(()=> {
+   myFavorites.forEach((fav)=> {
+       if(fav.id === id){
+           setIsFav(true)
+       }
+   })
+}, [myFavorites])
 
 
    return (
@@ -48,19 +48,18 @@ function Card(props) {
          )
       }
          </div>
-<img src={props.image} alt=''  className={style.img} /> 
+<img src={image} alt=''  className={style.img} /> 
  <div className={style.textBox} >
 
  <NavLink to={`/detail/${props.id}`} className={`${style.text} ${style.head}`} style={{ textDecoration: 'none', color: '#e2d240  ', backgroundColor: "#4c4b30", fontSize: "1.5em", }}>
 
-    <p style={{padding: "3px"}}>{props.name}</p>
+    <p className={style.name} >{name}</p>
     </NavLink>
 
     <span>Species</span>
-  
-         <p className={`${style.text} ${style.price}`}>{props.species}</p>
+         <p className={`${style.text} ${style.price}`}>{species}</p>
          <span>Gender</span>
-         <p className={`${style.text} ${style.price}`}>{props.gender}</p>
+         <p className={`${style.text} ${style.price}`}>{gender}</p>
   </div>
 
   <button  onClick={()=>{handleClose()}} className={style.button}  >X</button>  
@@ -75,11 +74,12 @@ function Card(props) {
 
 function mapDispatchToPorps(dispatch){
 return {
-addFav: (character) => {
-   dispatch(addFav(character))
+addFav: (character,user) => {
+   console.log(character)
+   dispatch(addFav(character,user))
 },
-removeFav: (id) => {
-dispatch(removeFav(id))
+removeFav: (id,user) => {
+dispatch(removeFav(id,user))
 }
 }
 }

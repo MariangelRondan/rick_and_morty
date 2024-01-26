@@ -1,8 +1,9 @@
-import { ADD_FAV, REMOVE_FAV, ORDER, FILTER } from "./actions";
+import { ADD_FAV, REMOVE_FAV, ORDER, FILTER, GET_FAVORITES } from "./actions";
 
 const initialState = {
   myFavorites: [],
   allCharacters: [],
+  allFavorites: [],
 };
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -10,11 +11,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         myFavorites: action.payload,
-        allCharacters: action.payload, //NO ENTIENDO ESTA PARTE
+        allCharacters: action.payload,
       };
 
     case REMOVE_FAV:
       return { ...state, myFavorites: action.payload };
+
+    case GET_FAVORITES:
+      return { allFavorites: action.payload };
 
     case FILTER:
       let copy3 = state.allCharacters.filter(

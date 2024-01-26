@@ -10,14 +10,12 @@ export default function Detail() {
     const [isLoading, setIsLoading] = useState(true);
  
 
-    //se ejecuta la callback de useEffect cada vez que cambia params.id
     useEffect(() => {
-// dispatch(getCharacterDetail(params.id)) //guarda en el estado global
       axios(`http://localhost:3001/rickandmorty/character/${params.id}`).then(
         ({ data }) => {
           if (data.name) {
             setCharacter(data);
-            setIsLoading(false); // Cambia el estado de isLoading cuando se obtienen los datos
+            setIsLoading(false); 
           } else {
             window.alert("No hay personajes con ese ID");
           }

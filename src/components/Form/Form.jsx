@@ -1,79 +1,16 @@
-// import React, { useState } from "react"
-import validation from "../../validation";
-// import style from './Form.module.css'
-// import {  NavLink } from 'react-router-dom';
-import style from '../generalStyles.module.css'
 
-// const Form = (props) => {
-//     const [userData, setUserData] = useState({
-//         email: '',
-//         password: '',
-//       });
-
-//       const [errors, setErrors] = useState({})
-
-//       const handleChange = (event) => {
-//         const property = event.target.name;
-//         const value = event.target.value;
-
-//         setUserData({...userData, [property]: value })
-//         setErrors(validation({...userData, [property]: value }))
-//       }
-
-//      const handleSubmit = (evento) => {
-// evento.preventDefault()
-//     // Llama a la función de inicio de sesión y pasa los datos del usuario
-//     props.login(userData);
-//      }
-
-//     return (
-//         <div className={style.formContainer}>
-//            <NavLink to='/register'>
-//                 <button className={style.register}>Registrarse</button>
-//             </NavLink>
-// <form onSubmit={handleSubmit}>
-//             <div  className={style.email}>
-//             <label>Email:</label>
-// <input 
-//        type="text"
-//        name="email"
-//        value = {userData.email}
-//        onChange={handleChange} 
-//        />
-// <p>{errors.email}</p>
-//             </div>
-
-//             <div className={style.password}>
-//             <label>Contraseña:</label>
-// <input 
-//        type="password"
-//        name="password"
-//        value = {userData.password} 
-//        onChange={handleChange}
-//        />
-// <p>{errors.password}</p>
-//             </div>
-
-// <button type="submit">Submit</button>
-
-//         </form>
-       
-//        </div>
-//     )
-// }
-
-
-// export default Form;
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
+ import validation from "../../validation";
+ import style from '../generalStyles.module.css'
 
-const Form = (props) => {
+
+const Form =(props) => {
 
 const [active, setActive] = useState("");
 const [isRegisterVisible, setIsRegisterVisible] = useState(false);
  
-
 
 const activateContainer = () => {
   setActive("active");
@@ -86,8 +23,8 @@ const deactivateContainer = () => {
 };
 
 
-    //funciones registro
-    const navigate = useNavigate();
+//funciones registro
+const navigate = useNavigate();
 
 const [formData, setFormData] = useState({
     name: '',
@@ -129,31 +66,28 @@ const handleSubmitR = async (e) => {
     }
   };
 
-
-
-    //fin funciones registro
+//fin funciones registro
     
     
-
-          const [userData, setUserData] = useState({
-              email: '',
-              password: '',
+const [userData, setUserData] = useState({
+               email: '',
+               password: '',
             });
       
-            const [errors, setErrors] = useState({})
+const [errors, setErrors] = useState({})
       
-            const handleChange = (event) => {
+const handleChange = (event) => {
               const property = event.target.name;
               const value = event.target.value;
-      
               setUserData({...userData, [property]: value })
               setErrors(validation({...userData, [property]: value }))
             }
       
-           const handleSubmit = (evento) => {
+const handleSubmit = (evento) => {
       evento.preventDefault()
-          // Llama a la función de inicio de sesión y pasa los datos del usuario
+      
           props.login(userData);
+          localStorage.setItem("user", userData.email)
            }
        
     return (
@@ -228,10 +162,9 @@ const handleSubmitR = async (e) => {
        
 <div className={`${styles.formContainer} ${styles.signIn}`}>
 
+
 <form onSubmit={handleSubmit}>
 <h1>Sign in</h1>
-
-
 
     <input 
     type="text"
@@ -249,7 +182,7 @@ const handleSubmitR = async (e) => {
     onChange={handleChange}
     />
 <a href="#">Forgot your password?</a>
-<button  type="submit" >   Sign In </button>
+<button  type="submit" >Sign In </button>
         </form>
 
 </div>

@@ -7,7 +7,6 @@ import store from "./redux/store";
 import { Provider } from "react-redux";
 
 ReactDOM.render(
-  //metodo render acepta un componente y donde va a pintar la app como parametros.
   <Provider store={store}>
     <BrowserRouter>
       <App />

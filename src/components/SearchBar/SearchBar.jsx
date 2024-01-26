@@ -2,7 +2,7 @@ import style from './SearchBar.module.css'
 import React from 'react';
 import { useState } from 'react';
 
-export default function SearchBar(prop) { 
+export default function SearchBar({onSearch}) { 
    const [id, setId] = useState("");
 
 const handleChange = (event) => {
@@ -11,7 +11,7 @@ setId(event.target.value);
 
    return (
       
-      //EJERCICIO 6
+ 
       <div className={style.agregar}>
          <input className={style.input}
           onChange={handleChange}
@@ -19,7 +19,7 @@ setId(event.target.value);
            placeholder='Add characters by ID...' 
            value={id}/>
 
-         <button className={style.button} onClick={() => {prop.onSearch(id)}}>Agregar</button> 
+         <button className={style.button} onClick={() => {onSearch(id)}}>Agregar</button> 
      {/* recibe la funcion onSearch como prop desde el componente nav. La funcion onSearch    
     se pasa commo prop desde App.js, a traves del coponente intermedio Nav, y finalmente a SearchBar. */}
 

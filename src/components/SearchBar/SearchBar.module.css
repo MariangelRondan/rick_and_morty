@@ -8,8 +8,9 @@ margin: 0.5%;
 }
 
 .button:hover{
-    background-color: transparent;
-   
+    background-color: #9aa35f ;
+    color:   #611b13      ;
+
 }
 
 

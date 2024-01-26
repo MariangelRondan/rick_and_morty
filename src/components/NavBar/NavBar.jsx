@@ -3,12 +3,12 @@ import React from 'react';
 import {  NavLink } from 'react-router-dom';
 import style from "./NavBar.module.css"
 
-function NavBar(prop){
+function NavBar({random, logOut,onSearch}){
     
     return (
         <div className={style.container}>
        
-            <button className={style.button} onClick={prop.random}>Random</button>
+            <button className={style.button} onClick={random}>Random</button>
             <NavLink to='/about'>
             <button  className={style.button} >About</button>
             </NavLink>
@@ -18,7 +18,7 @@ function NavBar(prop){
             </NavLink>
 
             <NavLink>
-            <button   className={style.button} onClick={prop.logOut}>Log Out</button>
+            <button   className={style.button} onClick={logOut}>Log Out</button>
             </NavLink>
 
             <NavLink to='/favorites'>
@@ -27,7 +27,7 @@ function NavBar(prop){
            
         
 <SearchBar 
-         onSearch={prop.onSearch}/>
+         onSearch={onSearch}/>
 
          
 

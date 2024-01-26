@@ -6,14 +6,19 @@
 margin: 5%;
  }
 
-select{
+select, .reset {
   font-size: 1.2em;
   color:   #9aa35f     ;
   border-color:   #9aa35f    ;
   background-color:     #611b13 ;
   margin: 2%;
  }
+.reset:hover{
+    background-color:  #9aa35f  ;
+    color: #611b13;
+    border-color:  #611b13;
 
+}
  @media only screen and (max-width: 768px) {
     .container {
       grid-template-columns: repeat(2, 1fr); 
