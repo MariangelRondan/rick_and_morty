@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useState, useEffect} from "react";
 import style from "./Detail.module.css"
-const back_url = process.env.BACK_URL;
+const BACK_URL = process.env.BACK_URL;
 
 export default function Detail() {
     const params = useParams();
@@ -12,7 +12,7 @@ export default function Detail() {
  
 
     useEffect(() => {
-      axios(`${back_url}/rickandmorty/character/${params.id}`).then(
+      axios(`${BACK_URL}/rickandmorty/character/${params.id}`).then(
         ({ data }) => {
           if (data.name) {
             setCharacter(data);
