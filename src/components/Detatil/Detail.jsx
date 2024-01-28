@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useState, useEffect} from "react";
 import style from "./Detail.module.css"
-const BACK_URL = process.env.BACK_URL;
+const url = process.env.REACT_APP_BACK_URL;
 
 export default function Detail() {
     const params = useParams();

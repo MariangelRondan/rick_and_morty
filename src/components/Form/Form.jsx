@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
  import validation from "../../validation";
  import style from '../generalStyles.module.css'
- const url = process.env.BACK_URL;
+ const url = process.env.REACT_APP_BACK_URL;
 
 const Form =(props) => {
 
