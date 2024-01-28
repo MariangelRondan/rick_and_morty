@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
  import validation from "../../validation";
  import style from '../generalStyles.module.css'
-
+ const back_url = process.env.BACK_URL;
 
 const Form =(props) => {
 
@@ -44,7 +44,7 @@ const handleSubmitR = async (e) => {
     e.preventDefault();
 
     try{
-        const response = await fetch('http://localhost:3001/rickandmorty/register', {
+        const response = await fetch(`${back_url}/rickandmorty/register`, {
             method: 'POST', 
             headers: {
               'Content-Type': 'application/json', // tipo de contenido del cuerpo de la solicitud
@@ -85,7 +85,6 @@ const handleChange = (event) => {
       
 const handleSubmit = (evento) => {
       evento.preventDefault()
-      
           props.login(userData);
           localStorage.setItem("user", userData.email)
            }
