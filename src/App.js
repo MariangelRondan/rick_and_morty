@@ -10,6 +10,7 @@ import Form from "./components/Form/Form";
 import { useLocation, useNavigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites/Favorites";
+const back_url = process.env.BACK_URL;
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -67,7 +68,7 @@ function App() {
   async function login(userData) {
     try {
       const { email, password } = userData;
-      const URL = "http://localhost:3001/rickandmorty/login/";
+      const URL = `${back_url}/login/`;
       const { data } = await axios(
         URL + `?email=${email}&password=${password}`
       );
