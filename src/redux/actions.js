@@ -11,7 +11,7 @@ export const GET_FAVORITES = "GET_FAVORITES";
 export const addFav = (character, user) => {
   console.log("character:", character);
   console.log("user:", user);
-  const endpoint = `${back_url}/fav/`;
+  const endpoint = `${back_url}/rickandmorty/fav/`;
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, { ...character, user });
@@ -22,7 +22,7 @@ export const addFav = (character, user) => {
   };
 };
 export const getFav = (user) => {
-  const endpoint = `${back_url}/fav/${user}`;
+  const endpoint = `${back_url}/rickandmorty/fav/${user}`;
   return async (dispatch) => {
     try {
       const { data } = await axios.get(endpoint);
@@ -38,7 +38,7 @@ export const removeFav = (id, user) => {
   console.log(id);
   console.log(user);
 
-  const endpoint = `${back_url}/fav/${id}?user=${user}`;
+  const endpoint = `${back_url}/rickandmorty/fav/${id}?user=${user}`;
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(endpoint);
