@@ -12,7 +12,7 @@ export default function Detail() {
  
 
     useEffect(() => {
-      axios(`${BACK_URL}/rickandmorty/character/${params.id}`).then(
+      axios(`${url}/rickandmorty/character/${params.id}`).then(
         ({ data }) => {
           if (data.name) {
             setCharacter(data);
