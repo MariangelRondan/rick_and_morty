@@ -57,6 +57,7 @@ return(
         <Card
         key={character.id}
         id={character.id}
+        name={character.name}
         status={character.status} 
         species={character.species} 
         gender={character.gender}

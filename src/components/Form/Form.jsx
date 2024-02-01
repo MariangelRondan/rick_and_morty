@@ -48,24 +48,34 @@ const handleChangeR = (e) => {
     const {name, value} = e.target;
     setFormData({...formData, [name]: value})
     const registrationErrors = validationRegister(formData);
-    setformErrors({ ...formErrors, ...registrationErrors });
+    setformErrors({  ...registrationErrors });
 }
+
+
 const handleSubmitR = async (e) => {
   e.preventDefault();
-    
   try {
-    const response = await axios.post(`${url}/rickandmorty/register`, formData);
-console.log("response"+ response)
-    if (response) {
+  const response = await axios.post(`${url}/rickandmorty/register`, formData);
+  console.log("holi",formData)
+console.log(response)
+    if (response.status == 200) {
+      console.log("response")
       Swal.fire(
         'Successful registration!',
         '',
         'success'
       )
-        navigate('/');}
+        navigate('/');
+      } 
+        
 
   } catch (error) {
-   
+   Swal.fire(
+    'All fields must be completed!',
+    '',
+    'error'
+  )
+
   }
 };
 
@@ -116,7 +126,7 @@ const handleSubmit = (evento) => {
         value={formData.name}
         onChange={handleChangeR}
       />
-                  <p>{formErrors.name}</p>
+                  <p className="error">{formErrors.name}</p>
 
          <label>
         Last name:
@@ -128,7 +138,7 @@ const handleSubmit = (evento) => {
         value={formData.lastname}
         onChange={handleChangeR}
       />
-                        <p>{formErrors.lastname}</p>
+                        <p className="error">{formErrors.lastname}</p>
 
          <label>
          Date of birth:
@@ -150,7 +160,7 @@ const handleSubmit = (evento) => {
         value={formData.email}
         onChange={handleChangeR}
       />  
-            <p>{loginErrors.email}</p>
+            <p className="error">{loginErrors.email}</p>
 
        <label>
       Password:
@@ -162,7 +172,7 @@ const handleSubmit = (evento) => {
         value={formData.password}
         onChange={handleChangeR}
       />
-            <p>{loginErrors.password}</p>
+            <p className="error">{loginErrors.password}</p>
 
       <button type="submit" >Sign Up</button>
      
@@ -194,7 +204,7 @@ const handleSubmit = (evento) => {
     placeholder="Password..."
     onChange={handleChange}
     />
-{/* <a href="#">Forgot your password?</a> */}
+
 <button  type="submit" >Sign In </button>
         </form>
 

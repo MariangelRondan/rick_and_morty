@@ -10,7 +10,11 @@ import Form from "./components/Form/Form";
 import { useLocation, useNavigate, Route, Routes } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Favorites from "./components/Favorites/Favorites";
+import Swal from 'sweetalert2';
+
 const url = process.env.REACT_APP_BACK_URL;
+
+
 
 function App() {
   const [characters, setCharacters] = useState([]);
@@ -20,20 +24,26 @@ function App() {
       const { data } = await axios(
         `https://rickandmortyapi.com/api/character/${id}`
       );
-      console.log(data);
       if (data.name) {
         const alreadyExist = characters.find(
           (character) => character.id === data.id
         );
         if (!alreadyExist) {
           setCharacters((oldChars) => [...oldChars, data]);
-        } else {
-          window.alert("Ese personaje ya ha sido agregado");
+        } else{
+          Swal.fire(
+            'Character already added!',
+            '',
+            'warning'
+          )
         }
       }
     } catch (error) {
-      window.alert(error.message);
-    }
+      Swal.fire(
+        ` Character with ID: ${id} was not found!`,
+         '',
+         'error'
+       )   }
   };
 
   const [addedCharacterIds, setAddedCharacterIds] = useState([]);
@@ -63,7 +73,7 @@ function App() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const [access, setAccess] = useState(false);
+  const [access, setAccess] = useState(localStorage.getItem('access') || null);
 
   async function login(userData) {
     try {
@@ -74,9 +84,14 @@ function App() {
       );
       const { access } = data;
       setAccess(data);
+      localStorage.setItem('access', access);
       access && navigate("/home");
     } catch (error) {
-      window.alert(error.message);
+      Swal.fire(
+        'Login error, try again!',
+        '',
+        'error'
+      )
     }
   }
 

@@ -3,6 +3,10 @@ import axios from "axios";
 import { useParams} from "react-router-dom";
 import { useState, useEffect} from "react";
 import style from "./Detail.module.css"
+import Swal from 'sweetalert2';
+
+
+
 const url = process.env.REACT_APP_BACK_URL;
 
 export default function Detail() {
@@ -18,7 +22,11 @@ export default function Detail() {
             setCharacter(data);
             setIsLoading(false); 
           } else {
-            window.alert("No hay personajes con ese ID");
+            Swal.fire(
+             ` No data Fouund for character with ID: ${params.id}!`,
+              '',
+              'error'
+            )
           }
         }
       );
@@ -27,9 +35,9 @@ export default function Detail() {
     let content;
   
     if (isLoading) {
-      content = <div class="loader">
-      <div class="loader_cube loader_cube--color"></div>
-       <div class="loader_cube loader_cube--glowing"></div>
+      content = <div className="loader">
+      <div className="loader_cube loader_cube--color"></div>
+       <div className="loader_cube loader_cube--glowing"></div>
     </div>
     } else if (character.name) {
       content = (
@@ -48,7 +56,7 @@ export default function Detail() {
         </div>
       );
     } else {
-      content = <p>No se encontraron datos para el personaje.</p>;
+      content = <p>Character's info NOT FOUND</p>;
     }
   
     return <div className="App">

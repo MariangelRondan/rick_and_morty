@@ -19,7 +19,24 @@
 
 }
 
+@media screen and (max-width: 870px) {
+  .container {
+    min-height: 800px;
+    height: 100vh;
+  }
 
+  .formContainer {
+    min-height: 80vh;
+    height: auto;
+  }
+}
+
+
+
+.error{
+color: rgba(255, 0, 0, 0.644);
+
+}
 
 .container p{
   font-size: 14px;
@@ -97,8 +114,8 @@ cursor: pointer;
 }
 .all{
   position: absolute;
-  top: 30%;
-  left: 28%;
+  top: 5%;
+  left: 25%;
 }
 .signIn{
   left: 0;
