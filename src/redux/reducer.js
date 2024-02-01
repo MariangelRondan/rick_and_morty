@@ -34,7 +34,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         myFavorites:
-        payload === "A"
+        action.payload === "A"
         ? allCharactersCopy.sort((a, b)=> a.id - b.id)
         : allCharactersCopy.sort((a, b)=> b.id - a.id)
       }       
