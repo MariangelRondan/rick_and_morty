@@ -5,7 +5,7 @@ export const REMOVE_FAV = "REMOVE_FAV";
 export const FILTER = "FILTER";
 export const ORDER = "ORDER";
 export const RESET = "RESET";
-const url = process.env.BACK_URL;
+const url = process.env.REACT_APP_BACK_URL;
 export const GET_FAVORITES = "GET_FAVORITES";
 
 export const addFav = (character, user) => {
