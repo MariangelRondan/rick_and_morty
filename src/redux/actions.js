@@ -1,4 +1,5 @@
 import axios from "axios";
+import Swal from 'sweetalert2';
 
 export const ADD_FAV = "ADD_FAV";
 export const REMOVE_FAV = "REMOVE_FAV";
@@ -15,12 +16,25 @@ export const addFav = (character, user) => {
   return async (dispatch) => {
     try {
       const { data } = await axios.post(endpoint, { ...character, user });
-      console.log(data);
     } catch (error) {
       console.log(error);
+      if (error.response && error.response.status === 400) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Missing data. Please fill in all required fields.',
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text:`${error.message}`  ,
+        });
+      }
     }
   };
-};
+  }
+
 export const getFav = (user) => {
   const endpoint = `${url}/rickandmorty/fav/${user}`;
   return async (dispatch) => {
