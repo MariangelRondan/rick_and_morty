@@ -2,8 +2,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
- import validation from "../../validation";
- import style from '../generalStyles.module.css'
+import {validationLogin,validationRegister} from '../../validation'; 
+
  const url = process.env.REACT_APP_BACK_URL;
 
 const Form =(props) => {
@@ -34,12 +34,20 @@ const [formData, setFormData] = useState({
     password: '',
 })
 
+const [formErrors, setformErrors] = useState({
+  name: '',
+  lastname: '',
+  dateOfBirth: '',
+  email: '',
+  password: '',
+})
 
 const handleChangeR = (e) => {
     const {name, value} = e.target;
     setFormData({...formData, [name]: value})
+    const registrationErrors = validationRegister(formData);
+    setformErrors({ ...formErrors, ...registrationErrors });
 }
-
 const handleSubmitR = async (e) => {
     e.preventDefault();
 
@@ -74,14 +82,17 @@ const [userData, setUserData] = useState({
                password: '',
             });
       
-const [errors, setErrors] = useState({})
+const [loginErrors, setLoginErrors] = useState({
+  email: "",
+  password: "",
+})
       
 const handleChange = (event) => {
               const property = event.target.name;
               const value = event.target.value;
               setUserData({...userData, [property]: value })
-              setErrors(validation({...userData, [property]: value }))
-            }
+              const loginErrors = validationLogin({ ...userData, [property]: value });
+              setLoginErrors({ ...loginErrors, ...loginErrors });            }
       
 const handleSubmit = (evento) => {
       evento.preventDefault()
@@ -110,6 +121,8 @@ const handleSubmit = (evento) => {
         value={formData.name}
         onChange={handleChangeR}
       />
+                  <p>{formErrors.name}</p>
+
          <label>
         Last name:
       </label>
@@ -120,6 +133,8 @@ const handleSubmit = (evento) => {
         value={formData.lastname}
         onChange={handleChangeR}
       />
+                        <p>{formErrors.lastname}</p>
+
          <label>
          Date of birth:
       </label>
@@ -140,6 +155,8 @@ const handleSubmit = (evento) => {
         value={formData.email}
         onChange={handleChangeR}
       />  
+            <p>{loginErrors.email}</p>
+
        <label>
       Password:
     </label>
@@ -150,6 +167,8 @@ const handleSubmit = (evento) => {
         value={formData.password}
         onChange={handleChangeR}
       />
+            <p>{loginErrors.password}</p>
+
       <button type="submit" >Sign Up</button>
      
 

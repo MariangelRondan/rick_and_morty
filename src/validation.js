@@ -1,4 +1,4 @@
-function validation(userData) {
+export function validationLogin(userData) {
   const validationEmail =
     /^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/;
 
@@ -23,4 +23,42 @@ function validation(userData) {
   return errors;
 }
 
-export default validation;
+export function validationRegister(formData) {
+  const validationEmail =
+    /^(([^<>()\[\]\.,;:\s@\”]+(\.[^<>()\[\]\.,;:\s@\”]+)*)|(\”.+\”))@(([^<>()[\]\.,;:\s@\”]+\.)+[^<>()[\]\.,;:\s@\”]{2,})$/;
+
+  const errors = {};
+
+  if (
+    !validationEmail.test(formData.email) ||
+    formData.email.length === 0 ||
+    formData.email.length > 35
+  ) {
+    errors.email = "Invalid email";
+  }
+
+  if (
+    formData.password.length === 0 ||
+    formData.password.length < 6 ||
+    formData.password.length > 10
+  ) {
+    errors.password = "Must be between 6 and 10 characters";
+  }
+
+  if (
+    formData.name.length === 0 ||
+    formData.name.length < 6 ||
+    formData.name.length > 10
+  ) {
+    errors.name = "Must be between 6 and 10 characters";
+  }
+  if (
+    formData.lastname.length === 0 ||
+    formData.lastname.length < 6 ||
+    formData.lastname.length > 10
+  ) {
+    errors.lastname = "Must be between 6 and 10 characters";
+  }
+
+  return errors;
+}
