@@ -2,7 +2,7 @@ import SearchBar from '../SearchBar/SearchBar.jsx';
 import React from 'react';
 import {  NavLink } from 'react-router-dom';
 import style from "./NavBar.module.css"
-
+import styles from "../generalStyles.module.css"
 function NavBar({random, logOut,onSearch}){
     
     return (
