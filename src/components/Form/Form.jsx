@@ -82,7 +82,7 @@ const handleSubmitR = async (e) => {
         Swal.fire({
           icon: 'error',
           title: 'Error',
-          text: errorData.error || 'An unexpected error occurred. Please try again.',
+          text: errorData.error || 'nose',
         });
       }
     } catch (error) {
@@ -92,7 +92,7 @@ const handleSubmitR = async (e) => {
       Swal.fire({
         icon: 'error',
         title: 'Error',
-        text: 'An unexpected error occurred. Please try again.',
+        text: errorData.error 
       });
     }
   };
