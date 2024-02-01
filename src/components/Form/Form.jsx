@@ -2,6 +2,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
+import Swal from 'sweetalert2';
+
 import {validationLogin,validationRegister} from '../../validation'; 
 
  const url = process.env.REACT_APP_BACK_URL;
@@ -51,26 +53,47 @@ const handleChangeR = (e) => {
 const handleSubmitR = async (e) => {
     e.preventDefault();
 
-    try{
-        const response = await fetch(`${url}/rickandmorty/register`, {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json', // tipo de contenido del cuerpo de la solicitud
-            },
-            body: JSON.stringify(formData)
-          });
-          
-          // Maneja la respuesta del servidor
-          if (response.ok) {
-            const data = await response.json(); 
-            console.log(data)
-            window.alert("Registro exitoso")
-               navigate('/');
-          } else {
-            console.error('Error al realizar la solicitud');
-          }
+    try {
+      const response = await fetch(`${url}/rickandmorty/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data);
+  
+        // Muestra SweetAlert2 para un registro exitoso
+        Swal.fire({
+          icon: 'success',
+          title: 'Success',
+          text: data.message || 'Registration successful!',
+        });
+  
+        navigate('/');
+      } else {
+        console.error('Error al realizar la solicitud');
+  
+        // Muestra SweetAlert2 para un error
+        const errorData = await response.json();
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: errorData.error || 'An unexpected error occurred. Please try again.',
+        });
+      }
     } catch (error) {
       console.error('Error:', error);
+  
+      // Muestra SweetAlert2 para un error
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'An unexpected error occurred. Please try again.',
+      });
     }
   };
 
