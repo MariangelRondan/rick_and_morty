@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
 import Swal from 'sweetalert2';
-
+import axios from 'axios';
 import {validationLogin,validationRegister} from '../../validation'; 
 
  const url = process.env.REACT_APP_BACK_URL;
@@ -51,51 +51,23 @@ const handleChangeR = (e) => {
     setformErrors({ ...formErrors, ...registrationErrors });
 }
 const handleSubmitR = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+    
+  try {
+    const response = await axios.post(`${url}/rickandmorty/register`, formData);
+console.log("response"+ response)
+    if (response) {
+      Swal.fire(
+        'Successful registration!',
+        '',
+        'success'
+      )
+        navigate('/');}
 
-    try {
-      const response = await fetch(`${url}/rickandmorty/register`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-  
-        // Muestra SweetAlert2 para un registro exitoso
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: data.message || 'Registration successful!',
-        });
-  
-        navigate('/');
-      } else {
-        console.error('Error al realizar la solicitud');
-  
-        // Muestra SweetAlert2 para un error
-        const errorData = await response.json();
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: errorData.error || 'nose',
-        });
-      }
-    } catch (error) {
-      console.error('Error:', error);
-  
-      // Muestra SweetAlert2 para un error
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: errorData.error 
-      });
-    }
-  };
+  } catch (error) {
+   
+  }
+};
 
 //fin funciones registro
     
