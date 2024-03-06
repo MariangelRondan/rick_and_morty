@@ -63,7 +63,7 @@ const handleSubmitR = async (e) => {
       navigate('/');
     }
   } catch (error) {
-    Swal.fire('All fields must be completed!', '', 'error');
+    Swal.fire('All fields must be completed', '', 'error');
   }
 };
 
