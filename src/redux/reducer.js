@@ -1,4 +1,4 @@
-import { ADD_FAV, REMOVE_FAV, ORDER, FILTER, GET_FAVORITES } from "./actions";
+import { ADD_FAV, REMOVE_FAV, ORDER, FILTER, GET_FAVORITES, RESET } from "./actions";
 
 const initialState = {
   myFavorites: [],
@@ -21,29 +21,30 @@ const rootReducer = (state = initialState, action) => {
       return { allFavorites: action.payload };
 
     case FILTER:
-      let copy3 = state.allCharacters.filter(
+      let genderFilter = state.allCharacters.filter(
         (character) => character.gender === action.payload
       );
       return {
         ...state,
-        myFavorites: copy3,
+        myFavorites: genderFilter,
       };
 
     case ORDER:
-      let copy4 = state.allCharacters;
-      let order = copy4.sort((a, b) => {
-        if (action.payload === "A") {
-          return a.id - b.id;
-        } else if (action.payload === "B") {
-          return b.id - a.id;
-        } else {
-          return 0;
-        }
-      });
+      const allCharactersCopy = [...state.allCharacters]
       return {
         ...state,
-        myFavorites: order,
-      };
+        myFavorites:
+        action.payload === "A"
+        ? allCharactersCopy.sort((a, b)=> a.id - b.id)
+        : allCharactersCopy.sort((a, b)=> b.id - a.id)
+      }       
+
+      case RESET:
+        return{
+          ...state,
+          myFavorites: state.allCharacters
+      }
+
     default:
       return state;
   }

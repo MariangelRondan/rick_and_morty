@@ -10,10 +10,7 @@ import { useState, useEffect } from "react";
 function Card(props) {
    const {id, name, species, gender,  image, onClose, addFav, removeFav, myFavorites} = props;
    let user;
-
-    user = localStorage.getItem("user") 
-
-console.log(user)
+   user = localStorage.getItem("user") 
    const handleClose = () => {
       onClose(id)
    };
@@ -22,7 +19,6 @@ console.log(user)
 
  const handleFavorite = () => {
    isFav ? removeFav(id, user) : addFav(props, user);
-   console.log(props)
    setIsFav(!isFav);
   };
 
@@ -37,7 +33,6 @@ useEffect(()=> {
 
 
    return (
-
 <div className={style.card}>
 <div className={style.fav}>
          {
@@ -75,7 +70,6 @@ useEffect(()=> {
 function mapDispatchToPorps(dispatch){
 return {
 addFav: (character,user) => {
-   console.log(character)
    dispatch(addFav(character,user))
 },
 removeFav: (id,user) => {

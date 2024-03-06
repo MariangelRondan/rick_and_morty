@@ -8,7 +8,7 @@ export default function About(){
 
 <p className={style.description}>
 
-Hello, I'm Mariangel Rondan, 22 years old, residing in Uruguay.</p> <p>I developed a Single Page Application (SPA) that collects data from characters through an external API and presents them in various ways. You can search for characters by ID, click the "Random" button to display characters randomly, and you also have the option to add them to your favorites.
+Hello, I'm Mariangel Rondan, 23 years old, residing in Uruguay.</p> <p>I developed a Single Page Application (SPA) that collects data from characters through an external API and presents them in various ways. You can search for characters by ID, click the "Random" button to display characters randomly, and you also have the option to add them to your favorites.
 
 Clicking on a character takes you to a detailed section where you'll find more comprehensive information about each one. The SPA is connected to an SQL database where registered users are stored. 
 </p> <p>The authentication system allows registered users stored in the database to log in, and their favorites are also stored in the database.

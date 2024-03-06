@@ -1,7 +1,10 @@
-
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
+import Swal from 'sweetalert2';
+import axios from 'axios';
+import {validationLogin,validationRegister} from '../../validation'; 
+
 import {validationLogin,validationRegister} from '../../validation'; 
 
  const url = process.env.REACT_APP_BACK_URL;
@@ -42,6 +45,7 @@ const [formErrors, setformErrors] = useState({
   password: '',
 })
 
+
 const handleChangeR = (e) => {
   const { name, value } = e.target;
   setFormData({ ...formData, [name]: value });
@@ -76,6 +80,7 @@ const [loginErrors, setLoginErrors] = useState({
   email: "",
   password: "",
 })
+
       
 const handleChange = (event) => {
   const property = event.target.name;
@@ -112,6 +117,8 @@ const handleSubmit = (evento) => {
         value={formData.name}
         onChange={handleChangeR}
       />
+                  <p className="error">{formErrors.name}</p>
+
                   <p>{formErrors.name}</p>
 
          <label>
@@ -124,6 +131,8 @@ const handleSubmit = (evento) => {
         value={formData.lastname}
         onChange={handleChangeR}
       />
+                        <p className="error">{formErrors.lastname}</p>
+
                         <p>{formErrors.lastname}</p>
 
          <label>
@@ -146,6 +155,8 @@ const handleSubmit = (evento) => {
         value={formData.email}
         onChange={handleChangeR}
       />  
+            <p className="error">{loginErrors.email}</p>
+
             <p>{loginErrors.email}</p>
 
        <label>
@@ -158,6 +169,8 @@ const handleSubmit = (evento) => {
         value={formData.password}
         onChange={handleChangeR}
       />
+            <p className="error">{loginErrors.password}</p>
+
             <p>{loginErrors.password}</p>
 
       <button type="submit" >Sign Up</button>
@@ -190,7 +203,7 @@ const handleSubmit = (evento) => {
     placeholder="Password..."
     onChange={handleChange}
     />
-{/* <a href="#">Forgot your password?</a> */}
+
 <button  type="submit" >Sign In </button>
         </form>
 
