@@ -2,8 +2,8 @@
 import React, { useState } from "react"
 import { useNavigate } from "react-router-dom";
 import styles from './Form.module.css'
- import validation from "../../validation";
- import style from '../generalStyles.module.css'
+import {validationLogin,validationRegister} from '../../validation'; 
+
  const url = process.env.REACT_APP_BACK_URL;
 
 const Form =(props) => {
@@ -34,37 +34,35 @@ const [formData, setFormData] = useState({
     password: '',
 })
 
+const [formErrors, setformErrors] = useState({
+  name: '',
+  lastname: '',
+  dateOfBirth: '',
+  email: '',
+  password: '',
+})
 
 const handleChangeR = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value})
-}
+  const { name, value } = e.target;
+  setFormData({ ...formData, [name]: value });
+  const registrationErrors = validationRegister(formData);
+  setformErrors({ ...registrationErrors });
+};
 
 const handleSubmitR = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
+  try {
+    const response = await axios.post(`${url}/rickandmorty/register`, formData);
 
-    try{
-        const response = await fetch(`${url}/rickandmorty/register`, {
-            method: 'POST', 
-            headers: {
-              'Content-Type': 'application/json', // tipo de contenido del cuerpo de la solicitud
-            },
-            body: JSON.stringify(formData)
-          });
-          
-          // Maneja la respuesta del servidor
-          if (response.ok) {
-            const data = await response.json(); 
-            console.log(data)
-            window.alert("Registro exitoso")
-               navigate('/');
-          } else {
-            console.error('Error al realizar la solicitud');
-          }
-    } catch (error) {
-      console.error('Error:', error);
+    if (response.status === 200) {
+      Swal.fire('Successful registration!', '', 'success');
+      navigate('/');
     }
-  };
+  } catch (error) {
+    Swal.fire('All fields must be completed!', '', 'error');
+  }
+};
+
 
 //fin funciones registro
     
@@ -74,20 +72,24 @@ const [userData, setUserData] = useState({
                password: '',
             });
       
-const [errors, setErrors] = useState({})
+const [loginErrors, setLoginErrors] = useState({
+  email: "",
+  password: "",
+})
       
 const handleChange = (event) => {
-              const property = event.target.name;
-              const value = event.target.value;
-              setUserData({...userData, [property]: value })
-              setErrors(validation({...userData, [property]: value }))
-            }
-      
+  const property = event.target.name;
+  const value = event.target.value;
+  setUserData({ ...userData, [property]: value });
+  const loginErrors = validationLogin({ ...userData, [property]: value });
+  setLoginErrors({ ...loginErrors });
+};
+
 const handleSubmit = (evento) => {
-      evento.preventDefault()
-          props.login(userData);
-          localStorage.setItem("user", userData.email)
-           }
+  evento.preventDefault();
+  props.login(userData);
+  localStorage.setItem('user', userData.email);
+};
        
     return (
 // register
@@ -110,6 +112,8 @@ const handleSubmit = (evento) => {
         value={formData.name}
         onChange={handleChangeR}
       />
+                  <p>{formErrors.name}</p>
+
          <label>
         Last name:
       </label>
@@ -120,6 +124,8 @@ const handleSubmit = (evento) => {
         value={formData.lastname}
         onChange={handleChangeR}
       />
+                        <p>{formErrors.lastname}</p>
+
          <label>
          Date of birth:
       </label>
@@ -140,6 +146,8 @@ const handleSubmit = (evento) => {
         value={formData.email}
         onChange={handleChangeR}
       />  
+            <p>{loginErrors.email}</p>
+
        <label>
       Password:
     </label>
@@ -150,6 +158,8 @@ const handleSubmit = (evento) => {
         value={formData.password}
         onChange={handleChangeR}
       />
+            <p>{loginErrors.password}</p>
+
       <button type="submit" >Sign Up</button>
      
 
