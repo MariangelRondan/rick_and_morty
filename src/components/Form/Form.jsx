@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import {validationLogin,validationRegister} from '../../validation'; 
 
-import {validationLogin,validationRegister} from '../../validation'; 
+
 
  const url = process.env.REACT_APP_BACK_URL;
 
