@@ -23,7 +23,7 @@ const Form = (props) => {
   const [formData, setFormData] = useState({
     name: '',
     lastname: '',
-    dateOfBirth: '',
+  
     email: '',
     password: '',
   });
@@ -31,7 +31,7 @@ const Form = (props) => {
   const [formErrors, setFormErrors] = useState({
     name: '',
     lastname: '',
-    dateOfBirth: '',
+   
     email: '',
     password: '',
   });
@@ -47,15 +47,27 @@ const Form = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post(`${url}/rickandmorty/register`, formData);
-
-      if (response.status === 200) {
+  
+      if (response.status === 201) {
+        setFormData({
+          name: '',
+          lastname: '',
+          email: '',
+          password: ''
+      });
         Swal.fire('Successful registration!', '', 'success');
         navigate('/');
       }
     } catch (error) {
-      // Swal.fire('All fields must be completed', '', 'error');
-console.log(error.message)    }
+      if (error.response && error.response.status === 409) { // HTTP 409 Conflict: Email already exists
+        Swal.fire('Email already registered', '', 'error');
+      } else {
+        console.log(error.message);
+        Swal.fire('An error occurred', '', 'error'); // Show a generic error message
+      }
+    }
   };
+  
 
   const [userData, setUserData] = useState({
     email: '',
@@ -111,17 +123,7 @@ console.log(error.message)    }
             </label>
             <p className="error">{formErrors.lastname}</p>
 
-            <label>
-              Date of birth:
-              <input
-                type="date"
-                name="dateOfBirth"
-                placeholder="Fecha"
-                value={formData.dateOfBirth}
-                onChange={handleChangeR}
-              />
-            </label>
-
+          
             <label>
               Email:
               <input
