@@ -46,7 +46,6 @@ export function validationRegister(formData) {
 
   if (
     formData.name.length === 0 ||
-<<<<<<< HEAD
     formData.name.length < 6 ||
     formData.name.length > 10
   ) {
@@ -58,20 +57,7 @@ export function validationRegister(formData) {
     formData.lastname.length > 10
   ) {
     errors.lastname = "Must be between 6 and 10 characters";
-=======
-    formData.name.length < 3 ||
-    formData.name.length > 20
-  ) {
-    errors.name = "Must be between 6 and 20 characters";
-  }
-  if (
-    formData.lastname.length === 0 ||
-    formData.name.length < 3 ||
-    formData.name.length > 20
-    
-  ) {
-    errors.lastname = "Must be between 6 and 20 characters";
->>>>>>> afa9bee62f196995899b2b43aa8acfa146c668ad
+
   }
 
   return errors;
